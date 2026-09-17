@@ -98,6 +98,7 @@ class HomeScreen extends ConsumerWidget {
         onPressed: () => _startScan(context, ref),
         icon: const Icon(Icons.camera_alt_outlined),
         label: const Text('Scan'),
+        shape: const StadiumBorder(),
       ),
     );
   }

@@ -1,6 +1,6 @@
 # SnapPDF
 
-Flutter offline document scanner and PDF creator (camera capture, edge detection, filters, multi-page, OCR, PDF export).
+Flutter offline document scanner and PDF creator for Android (camera capture, edge detection, filters, multi-page, OCR, PDF export).
 
 ## Architecture
 
@@ -26,5 +26,5 @@ Shared design system: `theme` package (git dependency, `its-ash/theme`) — use 
 ## Makefile
 
 - `make run` — `flutter run`
-- `make build` — `flutter build apk --release` (Android) and `flutter build ios --release --no-codesign` (iOS)
-- `make deploy` — not applicable to a mobile app; targets are placeholders only, see Makefile.
+- `make build` — `flutter build apk --release`
+- `make deploy` — build, bump the patch version in `pubspec.yaml`, commit/push to `main`, tag, and cut a GitHub release with the built APK attached.
