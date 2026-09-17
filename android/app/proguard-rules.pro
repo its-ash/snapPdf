@@ -1,8 +1,16 @@
-# ML Kit text recognition ships script-specific recognizers (Chinese, Devanagari,
-# Japanese, Korean) as optional dependencies. We only use the Latin recognizer,
-# so R8 can't resolve those classes at compile time — keep them as no-ops.
--dontwarn com.google.mlkit.vision.text.chinese.**
--dontwarn com.google.mlkit.vision.text.devanagari.**
--dontwarn com.google.mlkit.vision.text.japanese.**
--dontwarn com.google.mlkit.vision.text.korean.**
--keep class com.google.mlkit.vision.text.** { *; }
+# ML Kit resolves its components (including MlKitInitProvider, which runs at
+# app startup before any Dart code executes) via reflection-based dependency
+# injection. R8 stripping any part of com.google.mlkit.** breaks that
+# injection graph and crashes the app immediately on launch. Keep it whole.
+-dontwarn com.google.mlkit.**
+-keep class com.google.mlkit.** { *; }
+-keep interface com.google.mlkit.** { *; }
+
+# The vision text recognizer's optional script variants (Chinese, Devanagari,
+# Japanese, Korean) are referenced reflectively even though we only bundle
+# the Latin recognizer.
+-dontwarn com.google.android.gms.internal.mlkit_vision_text_bundled_common.**
+-dontwarn com.google.android.gms.internal.mlkit_vision_text_chinese.**
+-dontwarn com.google.android.gms.internal.mlkit_vision_text_devanagari.**
+-dontwarn com.google.android.gms.internal.mlkit_vision_text_japanese.**
+-dontwarn com.google.android.gms.internal.mlkit_vision_text_korean.**
